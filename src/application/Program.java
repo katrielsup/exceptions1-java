@@ -33,19 +33,15 @@ public class Program {
 			checkIn = sdf.parse(sc.next());
 			System.out.println("Check out date (dd/MM/yyyy) : ");
 			checkOut = sdf.parse(sc.next());
-
-			Date now = new Date();
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Erro da reserva seu otario , disgraçado digita esta porra certo , seu merdinha ");
-			} else if (!checkOut.after(checkIn)) {
-				System.out.println(
-						"Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.");
-			} else {
-
-				reservation.updateDates(checkIn, checkOut);
+			
+			String error =reservation.updateDates(checkIn, checkOut);
+			if(error != null) {
+				System.out.println("Seu filha da puta digita direito caralho. o erro é teu seu petista maldito");
+			}else {
 				System.out.println();
 				System.out.println("Reservation : " + reservation);
 			}
+				
 		}
 
 		sc.close();

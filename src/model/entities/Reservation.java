@@ -9,6 +9,7 @@ public class Reservation {
 	private Date checkIn;
 	private Date checkOut;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	public Reservation(Integer roomNumber, Date checkIn, Date checkOut) {
 		this.roomNumber = roomNumber;
 		this.checkIn = checkIn;
@@ -35,26 +36,27 @@ public class Reservation {
 		long diff = checkOut.getTime() - checkIn.getTime();
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
-	
-	public void updateDates(Date checkIn, Date checkOut){
+
+	public String updateDates(Date checkIn, Date checkOut) {
+		Date now = new Date();
+		if (checkIn.before(now) || checkOut.before(now)) {
+			return "Erro da reserva seu otario , disgraçado digita esta porra certo , seu merdinha ";
+		} 
+		
+		if (!checkOut.after(checkIn)) {
+			return "Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.";
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null;
+
 	}
 
 	@Override
 	public String toString() {
-		
-		return "  Romm   " +
-				roomNumber +
-				"   Check-in :  "+
-				sdf.format(checkIn) +
-				"  Check-out:   " +
-				sdf.format(checkOut) +
-				" Duration: "+
-				duration() +
-				" noites";
+
+		return "  Romm   " + roomNumber + "   Check-in :  " + sdf.format(checkIn) + "  Check-out:   "
+				+ sdf.format(checkOut) + " Duration: " + duration() + " noites";
 	}
-	
-	
 
 }
