@@ -39,6 +39,8 @@ public class Program {
 			System.out.println("Data invalida seu otario filho da puta disgraçado , maldito faça data certo caralho.");
 		} catch (DomainException e) {
 			System.out.println("Error: " + e.getMessage());
+		} catch(RuntimeException e) {
+			System.out.println("Unexpercter error ");
 		}
 		sc.close();
 	}
