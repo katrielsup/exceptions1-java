@@ -37,18 +37,19 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
-	public String updateDates(Date checkIn, Date checkOut) {
+	public void updateDates(Date checkIn, Date checkOut) {
 		Date now = new Date();
 		if (checkIn.before(now) || checkOut.before(now)) {
-			return "Erro da reserva seu otario , disgraçado digita esta porra certo , seu merdinha ";
-		} 
-		
+			throw new IllegalAccessError(
+					"Erro da reserva seu otario , disgraçado digita esta porra certo , seu merdinha ");
+		}
+
 		if (!checkOut.after(checkIn)) {
-			return "Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.";
+			throw new IllegalAccessError(
+					"Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.");
 		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;
 
 	}
 

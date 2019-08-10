@@ -9,21 +9,17 @@ import model.entities.Reservation;
 
 public class Program {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			System.out.println("Room number: ");
+			int number = sc.nextInt();
+			System.out.println("Check in date (dd/MM/yyyy) : ");
+			Date checkIn = sdf.parse(sc.next());
+			System.out.println("Check out date (dd/MM/yyyy) : ");
+			Date checkOut = sdf.parse(sc.next());
 
-		System.out.println("Room number: ");
-		int number = sc.nextInt();
-		System.out.println("Check in date (dd/MM/yyyy) : ");
-		Date checkIn = sdf.parse(sc.next());
-		System.out.println("Check out date (dd/MM/yyyy) : ");
-		Date checkOut = sdf.parse(sc.next());
-
-		if (!checkOut.after(checkIn)) {
-			System.out.println(
-					"Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.");
-		} else {
 			Reservation reservation = new Reservation(number, checkIn, checkOut);
 			System.out.println("Reservation : " + reservation);
 
@@ -33,17 +29,16 @@ public class Program {
 			checkIn = sdf.parse(sc.next());
 			System.out.println("Check out date (dd/MM/yyyy) : ");
 			checkOut = sdf.parse(sc.next());
-			
-			String error =reservation.updateDates(checkIn, checkOut);
-			if(error != null) {
-				System.out.println("Seu filha da puta digita direito caralho. o erro é teu seu petista maldito");
-			}else {
-				System.out.println();
-				System.out.println("Reservation : " + reservation);
-			}
-				
-		}
 
+			reservation.updateDates(checkIn, checkOut);
+
+			System.out.println("Reservation : " + reservation);
+
+		} catch (ParseException e) {
+			System.out.println("Data invalida seu otario filho da puta disgraçado , maldito faça data certo caralho.");
+		} catch (IllegalAccessError e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		sc.close();
 	}
 
