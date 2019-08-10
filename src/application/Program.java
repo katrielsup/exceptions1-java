@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import model.entities.Reservation;
+import model.exceptions.DomainException;
 
 public class Program {
 
@@ -36,7 +37,7 @@ public class Program {
 
 		} catch (ParseException e) {
 			System.out.println("Data invalida seu otario filho da puta disgraçado , maldito faça data certo caralho.");
-		} catch (IllegalAccessError e) {
+		} catch (DomainException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
 		sc.close();

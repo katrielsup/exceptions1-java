@@ -4,13 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import model.exceptions.DomainException;
+
 public class Reservation {
 	private Integer roomNumber;
 	private Date checkIn;
 	private Date checkOut;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-	public Reservation(Integer roomNumber, Date checkIn, Date checkOut) {
+	public Reservation(Integer roomNumber, Date checkIn, Date checkOut){
+		if (!checkOut.after(checkIn)) {
+			throw new DomainException(
+					"Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.");
+		}
 		this.roomNumber = roomNumber;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -37,15 +43,15 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
-	public void updateDates(Date checkIn, Date checkOut) {
+	public void updateDates(Date checkIn, Date checkOut)  {
 		Date now = new Date();
 		if (checkIn.before(now) || checkOut.before(now)) {
-			throw new IllegalAccessError(
+			throw new DomainException(
 					"Erro da reserva seu otario , disgraçado digita esta porra certo , seu merdinha ");
 		}
 
 		if (!checkOut.after(checkIn)) {
-			throw new IllegalAccessError(
+			throw new DomainException(
 					"Datas informadas são invalidas caralho , filho da puta disgraçado que não sabe digitar seu bosta , se mate loCo.");
 		}
 		this.checkIn = checkIn;
